@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import simpledialog
 
-class Pila:
+class Cola:
     def __init__(self):
         self.items = []
 
@@ -13,14 +13,14 @@ class Pila:
 
     def eliminar(self):
         if not self.esta_vacia():
-            return self.items.pop()
+            return self.items.pop(0)
 
-class InterfazGraficaPila:
+class InterfazGraficaCola:
     def __init__(self, ventana):
         self.ventana = ventana
-        self.ventana.title("Pila")
+        self.ventana.title("Cola")
 
-        self.pila = Pila()
+        self.cola = Cola()
 
         self.canvas = tk.Canvas(ventana, width=200, height=300, bg='white', highlightthickness=0)
         self.canvas.pack()
@@ -34,20 +34,20 @@ class InterfazGraficaPila:
         self.bloques = []
 
     def insertar_elemento(self):
-        valor = tk.simpledialog.askstring("Insertar en la pila", "Ingrese el valor a insertar en la pila:")
-        if valor:
-            self.pila.insertar(valor)
-            self.mostrar_pila()
+        valor = tk.simpledialog.askstring("Insertar en la cola", "Ingrese el valor a insertar en la cola:")
+        if valor is not None:
+            self.cola.insertar(valor)
+            self.mostrar_cola()
 
     def eliminar_elemento(self):
-        if not self.pila.esta_vacia():
-            self.pila.eliminar()
-            self.mostrar_pila()
+        if not self.cola.esta_vacia():
+            self.cola.eliminar()
+            self.mostrar_cola()
 
-    def mostrar_pila(self):
+    def mostrar_cola(self):
         self.canvas.delete("bloque")
         self.bloques = []
-        for i, valor in enumerate(self.pila.items):
+        for i, valor in enumerate(self.cola.items):
             x0, y0 = 50, 50 + i * 40
             lado = 40
             self.canvas.create_rectangle(x0, y0, x0 + lado, y0 + lado, fill="skyblue", tags="bloque")
@@ -55,5 +55,5 @@ class InterfazGraficaPila:
 
 # Crear la ventana principal de la aplicación
 ventana_principal = tk.Tk()
-app = InterfazPila(ventana_principal)
+app = InterfazGraficaCola(ventana_principal)
 ventana_principal.mainloop()
