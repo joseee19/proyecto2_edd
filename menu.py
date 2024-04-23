@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog
 from e_pila import InterfazGraficaPila
 from e_cola import InterfazGraficaCola
+from e_lista_circular import InterfazGraficaListaCircular
 from e_lista_simplemente_enlazada import InterfazGraficaListaSimplementeEnlazada
 
 class InterfazGrafica:
@@ -33,7 +34,8 @@ class InterfazGrafica:
             ventana_lista = tk.Toplevel(self.ventana)
             self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada(ventana_lista)
         elif opcion == "Lista circular":
-            messagebox.showinfo("Lista circular", "Función en construcción.")
+            ventana_lista_cir = tk.Toplevel(self.ventana)
+            self.interfaz_actual = InterfazGraficaListaCircular(ventana_lista_cir)
         elif opcion == "Lista doblemente enlazada":
             messagebox.showinfo("Lista doblemente enlazada", "Función en construcción.")
         elif opcion == "Lista circular doble":
