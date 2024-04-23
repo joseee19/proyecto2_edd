@@ -55,5 +55,5 @@ class InterfazGraficaPila:
 
 # Crear la ventana principal de la aplicación
 ventana_principal = tk.Tk()
-app = InterfazPila(ventana_principal)
+app = InterfazGraficaPila(ventana_principal)
 ventana_principal.mainloop()

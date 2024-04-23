@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 from e_pila import InterfazGraficaPila
-from e_cola import InterfazGraficaCola  # Importamos la nueva interfaz de la cola
+from e_cola import InterfazGraficaCola
+from e_lista_simplemente_enlazada import InterfazGraficaListaSimplementeEnlazada
 
 class InterfazGrafica:
     def __init__(self, ventana):
@@ -23,12 +24,21 @@ class InterfazGrafica:
 
     def mostrar_interfaz(self, opcion):
         if opcion == "Pila":
-            self.interfaz_actual = InterfazGraficaPila(self.ventana)
+            self.interfaz_actual = InterfazGraficaPila()
         elif opcion == "Cola":
-            self.interfaz_actual = InterfazGraficaCola(self.ventana)  # Mostramos la interfaz de la cola
+            self.interfaz_actual = InterfazGraficaCola()
         elif opcion == "Lista simplemente ligada":
-            messagebox.showinfo("Lista simplemente ligada", "Función en construcción.")
-        # Aquí se agregarían las otras opciones de estructuras de datos
+            self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada()
+        elif opcion == "Lista circular":
+            messagebox.showinfo("Lista circular", "Función en construcción.")
+        elif opcion == "Lista doblemente enlazada":
+            messagebox.showinfo("Lista doblemente enlazada", "Función en construcción.")
+        elif opcion == "Lista circular doble":
+            messagebox.showinfo("Lista circular doble", "Función en construcción.")
+        elif opcion == "Árbol binario":
+            messagebox.showinfo("Árbol binario", "Función en construcción.")
+        elif opcion == "Árbol de búsqueda":
+            messagebox.showinfo("Árbol de búsqueda", "Función en construcción.")
 
 # Crear la ventana principal de la aplicación
 ventana_principal = tk.Tk()
