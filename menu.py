@@ -24,11 +24,14 @@ class InterfazGrafica:
 
     def mostrar_interfaz(self, opcion):
         if opcion == "Pila":
-            self.interfaz_actual = InterfazGraficaPila()
+            ventana_pila = tk.Toplevel(self.ventana)
+            self.interfaz_actual = InterfazGraficaPila(ventana_pila)
         elif opcion == "Cola":
-            self.interfaz_actual = InterfazGraficaCola()
+            ventana_cola = tk.Toplevel(self.ventana)
+            self.interfaz_actual = InterfazGraficaCola(ventana_cola)
         elif opcion == "Lista simplemente ligada":
-            self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada()
+            ventana_lista = tk.Toplevel(self.ventana)
+            self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada(ventana_lista)
         elif opcion == "Lista circular":
             messagebox.showinfo("Lista circular", "Función en construcción.")
         elif opcion == "Lista doblemente enlazada":
