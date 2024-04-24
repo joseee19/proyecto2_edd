@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import simpledialog, messagebox
+from tkinter import messagebox, simpledialog
 from e_pila import InterfazGraficaPila
 from e_cola import InterfazGraficaCola
 from e_lista_simplemente_enlazada import InterfazGraficaListaSimplementeEnlazada
@@ -17,7 +17,9 @@ class InterfazGrafica:
         self.etiqueta_seleccion = tk.Label(self.frame_menu, text="Seleccione una estructura de datos:")
         self.etiqueta_seleccion.grid(row=0, column=0)
 
-        self.opciones = ["Pila", "Cola", "Lista simplemente ligada", "Lista circular", "Lista doblemente ligada", "Lista circular doble", "Árbol binario", "Árbol de búsqueda"]
+        self.opciones = ["Pila", "Cola", "Lista simplemente ligada", "Lista circular",
+                         "Lista doblemente enlazada", "Lista circular doble", 
+                         "Árbol binario", "Árbol de búsqueda"]
 
         self.menu = tk.OptionMenu(self.frame_menu, tk.StringVar(), *self.opciones, command=self.mostrar_interfaz)
         self.menu.grid(row=0, column=1)
@@ -25,27 +27,19 @@ class InterfazGrafica:
         self.interfaz_actual = None
 
     def mostrar_interfaz(self, opcion):
+        if self.interfaz_actual:
+            self.interfaz_actual.destroy()  # Cerrar la ventana actual si existe
+
         if opcion == "Pila":
-            ventana_pila = tk.Toplevel(self.ventana)
-            self.interfaz_actual = InterfazGraficaPila(ventana_pila)
+            self.interfaz_actual = InterfazGraficaPila(self.ventana)
         elif opcion == "Cola":
-            ventana_cola = tk.Toplevel(self.ventana)
-            self.interfaz_actual = InterfazGraficaCola(ventana_cola)
+            self.interfaz_actual = InterfazGraficaCola(self.ventana)
         elif opcion == "Lista simplemente ligada":
-            ventana_lista = tk.Toplevel(self.ventana)
-            self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada(ventana_lista)
+            self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada(self.ventana)
         elif opcion == "Lista circular":
-            ventana_lista_cir = tk.Toplevel(self.ventana)
-            self.interfaz_actual = InterfazGraficaListaCircular(ventana_lista_cir)
-        elif opcion == "Lista doblemente ligada":
-            ventana_lista_doble = tk.Toplevel(self.ventana)
-            self.interfaz_actual = InterfazGraficaListaDoblementeEnlazada(ventana_lista_doble)
-        elif opcion == "Lista circular doble":
-            messagebox.showinfo("Lista circular doble", "Función en construcción.")
-        elif opcion == "Árbol binario":
-            messagebox.showinfo("Árbol binario", "Función en construcción.")
-        elif opcion == "Árbol de búsqueda":
-            messagebox.showinfo("Árbol de búsqueda", "Función en construcción.")
+            self.interfaz_actual = InterfazGraficaListaCircular(self.ventana)
+        elif opcion == "Lista doblemente enlazada":
+            self.interfaz_actual = InterfazGraficaListaDoblementeEnlazada(self.ventana)
 
 # Crear la ventana principal de la aplicación
 ventana_principal = tk.Tk()
