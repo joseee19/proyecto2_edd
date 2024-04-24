@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
+from e_pila import InterfazGraficaPila
+from e_cola import InterfazGraficaCola
+from e_lista_simplemente_enlazada import InterfazGraficaListaSimplementeEnlazada
+from e_lista_circular import InterfazGraficaListaCircular
 from e_lista_doblemente_enlazada import InterfazGraficaListaDoblementeEnlazada
 
 class InterfazGrafica:
