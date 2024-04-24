@@ -69,28 +69,36 @@ class ListaSimplementeEnlazada:
         return valores
 
 class InterfazGraficaListaSimplementeEnlazada:
-    def __init__(self, ventana):
-        self.ventana = ventana
+    def __init__(self):
+        self.ventana = tk.Tk()
         self.ventana.title("Lista Simplemente Enlazada")
 
         self.lista = ListaSimplementeEnlazada()
 
-        self.canvas = tk.Canvas(ventana, width=200, height=300, bg='white', highlightthickness=0)
-        self.canvas.pack()
+        self.canvas = tk.Canvas(self.ventana, width=200, bg='white', highlightthickness=0)
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        self.btn_insertar_inicio = tk.Button(ventana, text="Insertar al inicio", command=self.insertar_inicio)
+        self.scrollbar = tk.Scrollbar(self.ventana, orient=tk.VERTICAL, command=self.canvas.yview)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        self.frame_colocar = tk.Frame(self.canvas)
+        self.canvas.create_window((0, 0), window=self.frame_colocar, anchor=tk.NW)
+
+        self.btn_insertar_inicio = tk.Button(self.frame_colocar, text="Insertar al inicio", command=self.insertar_inicio)
         self.btn_insertar_inicio.pack()
 
-        self.btn_insertar_final = tk.Button(ventana, text="Insertar al final", command=self.insertar_final)
+        self.btn_insertar_final = tk.Button(self.frame_colocar, text="Insertar al final", command=self.insertar_final)
         self.btn_insertar_final.pack()
 
-        self.btn_eliminar_inicio = tk.Button(ventana, text="Eliminar al inicio", command=self.eliminar_inicio)
+        self.btn_eliminar_inicio = tk.Button(self.frame_colocar, text="Eliminar al inicio", command=self.eliminar_inicio)
         self.btn_eliminar_inicio.pack()
 
-        self.btn_eliminar_final = tk.Button(ventana, text="Eliminar al final", command=self.eliminar_final)
+        self.btn_eliminar_final = tk.Button(self.frame_colocar, text="Eliminar al final", command=self.eliminar_final)
         self.btn_eliminar_final.pack()
 
-        self.btn_buscar = tk.Button(ventana, text="Buscar", command=self.buscar_valor)
+        self.btn_buscar = tk.Button(self.frame_colocar, text="Buscar", command=self.buscar_valor)
         self.btn_buscar.pack()
 
         self.bloques = []
@@ -128,13 +136,15 @@ class InterfazGraficaListaSimplementeEnlazada:
             messagebox.showinfo("Elemento no encontrado", f"El valor {valor} no está en la lista.")
 
     def mostrar_lista(self):
-        self.canvas.delete("nodo")
-        y = 50
+        for widget in self.frame_colocar.winfo_children():
+            widget.destroy()
+
         for valor in self.lista.mostrar():
-            self.canvas.create_text(100, y, text=valor, font=("Arial", 12), tags="nodo")
-            y += 30
+            tk.Label(self.frame_colocar, text=str(valor)).pack()
+
+    def iniciar(self):
+        self.ventana.mainloop()
 
 if __name__ == "__main__":
-    ventana_principal = tk.Tk()
-    app = InterfazGraficaListaSimplementeEnlazada(ventana_principal)
-    ventana_principal.mainloop()
+    app = InterfazGraficaListaSimplementeEnlazada()
+    app.iniciar()
