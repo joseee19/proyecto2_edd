@@ -29,31 +29,31 @@ class InterfazGrafica:
 
     def mostrar_interfaz(self, opcion):
         if opcion == "Pila":
-            ventana_pila = tk.Toplevel(self.ventana)
+            ventana_pila = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaPila(ventana_pila)
         elif opcion == "Cola":
-            ventana_cola = tk.Toplevel(self.ventana)
+            ventana_cola = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaCola(ventana_cola)
         elif opcion == "Lista simplemente ligada":
-            ventana_lista = tk.Toplevel(self.ventana)
+            ventana_lista = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaListaSimplementeEnlazada(ventana_lista)
         elif opcion == "Lista circular":
-            ventana_lista_cir = tk.Toplevel(self.ventana)
+            ventana_lista_cir = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaListaCircular(ventana_lista_cir)
         elif opcion == "Lista doblemente ligada":
-            ventana_lista_doble = tk.Toplevel(self.ventana)
+            ventana_lista_doble = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaListaDoblementeEnlazada(ventana_lista_doble)
         elif opcion == "Lista circular doble":
-            ventana_lista_cir_doble = tk.Toplevel(self.ventana)
+            ventana_lista_cir_doble = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaListaCircularDoble(ventana_lista_cir_doble)
         elif opcion == "Árbol binario":
-            ventana_arbol = tk.Toplevel(self.ventana)
+            ventana_arbol = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaArbolBinario(ventana_arbol)
         elif opcion == "Árbol de búsqueda":
-            ventana_arbol_busq = tk.Toplevel(self.ventana)
+            ventana_arbol_busq = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaArbolBusquedaBinaria(ventana_arbol_busq)
 
-# Crear la ventana principal de la aplicación
+
 ventana_principal = tk.Tk()
 app = InterfazGrafica(ventana_principal)
 ventana_principal.mainloop()
