@@ -6,13 +6,13 @@ from e_lista_circular import InterfazGraficaListaCircular
 from e_lista_simplemente_enlazada import InterfazGraficaListaSimplementeEnlazada
 from e_lista_doblemente_enlazada import InterfazGraficaListaDoblementeEnlazada
 from e_lista_circular_doble import InterfazGraficaListaCircularDoble
-from e_arbol_binario import InterfazGraficaArbolBinario
+# from e_arbol_binario import InterfazGraficaArbolBinario
 from e_arbol_busqueda import InterfazGraficaArbolBusquedaBinaria
 
 class InterfazGrafica:
     def __init__(self, ventana):
         self.ventana = ventana
-        self.ventana.title("Software Educativo - Estructuras de Datos")
+        self.ventana.title("Software Educativo - Estructura de Datos")
 
         self.frame_menu = tk.Frame(ventana)
         self.frame_menu.pack()
@@ -48,7 +48,7 @@ class InterfazGrafica:
             self.interfaz_actual = InterfazGraficaListaCircularDoble(ventana_lista_cir_doble)
         elif opcion == "Árbol binario":
             ventana_arbol = tk.Toplevel()
-            self.interfaz_actual = InterfazGraficaArbolBinario(ventana_arbol)
+            # self.interfaz_actual = InterfazGraficaArbolBinario(ventana_arbol)
         elif opcion == "Árbol de búsqueda":
             ventana_arbol_busq = tk.Toplevel()
             self.interfaz_actual = InterfazGraficaArbolBusquedaBinaria(ventana_arbol_busq)
