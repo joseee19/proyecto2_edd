@@ -54,6 +54,6 @@ class InterfazGraficaPila:
             self.canvas.create_text(x0 + lado/2, y0 + lado/2, text=str(valor), font=("Arial", 12))
 
 # Crear la ventana principal de la aplicación
-ventana_principal = tk.Tk()
-app = InterfazGraficaPila(ventana_principal)
-ventana_principal.mainloop()
+# ventana_principal = tk.Tk()
+# app = InterfazGraficaPila(ventana_principal)
+# ventana_principal.mainloop()
