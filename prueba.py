@@ -64,6 +64,7 @@ class VentanaGeneral:
 
     # Función que se ejecutará al hacer clic en el primer botón de la lista de botones izquierda
     def accion_boton_pila(self):
+
         ventana_pila = tk.Toplevel()
         self.interfaz_actual = InterfazGraficaPila(ventana_pila)
 
