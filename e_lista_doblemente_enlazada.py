@@ -153,7 +153,3 @@ class InterfazGraficaListaDoblementeEnlazada:
         self.canvas.update_idletasks()
         self.canvas.config(scrollregion=self.canvas.bbox("all"))
 
-if __name__ == "__main__":
-    ventana_principal = tk.Tk()
-    app = InterfazGraficaListaDoblementeEnlazada(ventana_principal)
-    ventana_principal.mainloop()

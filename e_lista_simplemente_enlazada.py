@@ -69,8 +69,8 @@ class ListaSimplementeEnlazada:
         return valores
 
 class InterfazGraficaListaSimplementeEnlazada:
-    def __init__(self):
-        self.ventana = tk.Tk()
+    def __init__(self, ventana):
+        self.ventana = ventana
         self.ventana.title("Lista Simplemente Enlazada")
 
         self.lista = ListaSimplementeEnlazada()
@@ -145,6 +145,3 @@ class InterfazGraficaListaSimplementeEnlazada:
     def iniciar(self):
         self.ventana.mainloop()
 
-if __name__ == "__main__":
-    app = InterfazGraficaListaSimplementeEnlazada()
-    app.iniciar()

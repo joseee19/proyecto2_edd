@@ -13,7 +13,8 @@ class Pila:
 
     def eliminar(self):
         if not self.esta_vacia():
-            return self.items.pop()
+            return self.items.pop() and self.elemento.pop()
+
 
 class InterfazGraficaPila:
     def __init__(self, ventana):
@@ -52,8 +53,3 @@ class InterfazGraficaPila:
             lado = 40
             self.canvas.create_rectangle(x0, y0, x0 + lado, y0 + lado, fill="skyblue", tags="bloque")
             self.canvas.create_text(x0 + lado/2, y0 + lado/2, text=str(valor), font=("Arial", 12))
-
-# Crear la ventana principal de la aplicación
-# ventana_principal = tk.Tk()
-# app = InterfazGraficaPila(ventana_principal)
-# ventana_principal.mainloop()
