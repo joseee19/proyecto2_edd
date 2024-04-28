@@ -61,9 +61,9 @@ class ArbolBusquedaBinaria:
 
     def _buscar_recursivo(self, nodo, valor):
         if nodo is None:
-            return False
+            return None
         if valor == nodo.valor:
-            return True
+            return nodo
         elif valor < nodo.valor:
             return self._buscar_recursivo(nodo.izquierda, valor)
         else:
@@ -76,16 +76,16 @@ class InterfazGraficaArbolBusquedaBinaria:
 
         self.arbol = ArbolBusquedaBinaria()
 
-        self.canvas = tk.Canvas(ventana, width=400, height=400, bg='white', highlightthickness=0)
+        self.canvas = tk.Canvas(ventana, width=800, height=500, bg='lightblue', highlightthickness=0)
         self.canvas.pack()
 
-        self.btn_insertar = tk.Button(ventana, text="Insertar", command=self.insertar_valor)
+        self.btn_insertar = tk.Button(ventana, text="Insertar", width=43, height=2,command=self.insertar_valor)
         self.btn_insertar.pack()
 
-        self.btn_eliminar = tk.Button(ventana, text="Eliminar", command=self.eliminar_valor)
+        self.btn_eliminar = tk.Button(ventana, text="Eliminar", width=43, height=2,command=self.eliminar_valor)
         self.btn_eliminar.pack()
 
-        self.btn_buscar = tk.Button(ventana, text="Buscar", command=self.buscar_valor)
+        self.btn_buscar = tk.Button(ventana, text="Buscar",width=43, height=2, command=self.buscar_valor)
         self.btn_buscar.pack()
 
     def insertar_valor(self):
@@ -103,26 +103,30 @@ class InterfazGraficaArbolBusquedaBinaria:
     def buscar_valor(self):
         valor = simpledialog.askinteger("Buscar valor", "Ingrese el valor a buscar:")
         if valor is not None:
-            encontrado = self.arbol.buscar(valor)
-            if encontrado:
+            nodo_resaltado = self.arbol.buscar(valor)
+            if nodo_resaltado:
                 messagebox.showinfo("Valor encontrado", f"El valor {valor} está en el árbol.")
+                self.mostrar_arbol(nodo_resaltado)  # Mostrar el árbol con el nodo buscado resaltado
             else:
                 messagebox.showinfo("Valor no encontrado", f"El valor {valor} no está en el árbol.")
 
-    def mostrar_arbol(self):
+    def mostrar_arbol(self, nodo_resaltado=None):
         self.canvas.delete("nodo")
-        self._mostrar_arbol_recursivo(self.arbol.raiz, 200, 50, 100)
+        self._mostrar_arbol_recursivo(self.arbol.raiz, 400, 50, 125, nodo_resaltado)
 
-    def _mostrar_arbol_recursivo(self, nodo, x, y, espacio):
+    def _mostrar_arbol_recursivo(self, nodo, x, y, espacio, nodo_resaltado=None):
         if nodo is not None:
-            self.canvas.create_oval(x-20, y-20, x+20, y+20, fill="white", outline="black", tags="nodo")
+            color = "white"
+            if nodo_resaltado and nodo_resaltado.valor == nodo.valor:
+                color = "yellow"  # Cambiar color del círculo del nodo buscado
+            self.canvas.create_oval(x-20, y-20, x+20, y+20, fill=color, outline="black", tags="nodo")
             self.canvas.create_text(x, y, text=str(nodo.valor), tags="nodo")
             if nodo.izquierda is not None:
                 self.canvas.create_line(x-20, y+20, x-espacio+20, y+100, arrow=tk.LAST, tags="nodo")
-                self._mostrar_arbol_recursivo(nodo.izquierda, x-espacio, y+100, espacio//2)
+                self._mostrar_arbol_recursivo(nodo.izquierda, x-espacio, y+100, espacio//2, nodo_resaltado)
             if nodo.derecha is not None:
                 self.canvas.create_line(x+20, y+20, x+espacio-20, y+100, arrow=tk.LAST, tags="nodo")
-                self._mostrar_arbol_recursivo(nodo.derecha, x+espacio, y+100, espacio//2)
+                self._mostrar_arbol_recursivo(nodo.derecha, x+espacio, y+100, espacio//2, nodo_resaltado)
 
 if __name__ == "__main__":
     ventana_principal = tk.Tk()

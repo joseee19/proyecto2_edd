@@ -114,29 +114,30 @@ class InterfazGraficaListaCircular:
 
         self.lista = ListaCircular()
 
-        self.canvas = tk.Canvas(ventana, width=200, height=300, bg='white', highlightthickness=0)
+        self.canvas = tk.Canvas(ventana, width=350, height=250, bg='gray', highlightthickness=0)
         self.canvas.pack()
 
-        self.btn_insertar_inicio = tk.Button(ventana, text="Insertar al inicio", command=self.insertar_inicio)
+        self.btn_insertar_inicio = tk.Button(ventana, text="Insertar al inicio",width=43, height=2, command=self.insertar_inicio)
         self.btn_insertar_inicio.pack()
 
-        self.btn_insertar_final = tk.Button(ventana, text="Insertar al final", command=self.insertar_final)
+        self.btn_insertar_final = tk.Button(ventana, text="Insertar al final",width=43, height=2, command=self.insertar_final)
         self.btn_insertar_final.pack()
 
-        self.btn_eliminar_inicio = tk.Button(ventana, text="Eliminar al inicio", command=self.eliminar_inicio)
+        self.btn_eliminar_inicio = tk.Button(ventana, text="Eliminar al inicio",width=43, height=2, command=self.eliminar_inicio)
         self.btn_eliminar_inicio.pack()
 
-        self.btn_eliminar_final = tk.Button(ventana, text="Eliminar al final", command=self.eliminar_final)
+        self.btn_eliminar_final = tk.Button(ventana, text="Eliminar al final",width=43, height=2, command=self.eliminar_final)
         self.btn_eliminar_final.pack()
 
-        self.btn_buscar = tk.Button(ventana, text="Buscar", command=self.buscar_valor)
-        self.btn_buscar.pack()
 
-        self.btn_rotar_izquierda = tk.Button(ventana, text="Rotar a la izquierda", command=self.rotar_izquierda)
+        self.btn_rotar_izquierda = tk.Button(ventana, text="Rotar a la izquierda",width=43, height=2, command=self.rotar_izquierda)
         self.btn_rotar_izquierda.pack()
 
-        self.btn_rotar_derecha = tk.Button(ventana, text="Rotar a la derecha", command=self.rotar_derecha)
+        self.btn_rotar_derecha = tk.Button(ventana, text="Rotar a la derecha",width=43, height=2, command=self.rotar_derecha)
         self.btn_rotar_derecha.pack()
+
+        self.btn_buscar = tk.Button(ventana, text="Buscar",width=43, height=2, command=self.buscar_valor)
+        self.btn_buscar.pack()
 
         self.bloques = []
 
@@ -181,11 +182,16 @@ class InterfazGraficaListaCircular:
         self.mostrar_lista()
 
     def mostrar_lista(self):
-        self.canvas.delete("nodo")
-        y = 50
-        for valor in self.lista.mostrar():
-            self.canvas.create_text(100, y, text=valor, font=("Arial", 12), tags="nodo")
-            y += 30
+        self.canvas.delete("bloque")
+        bloque_ancho = 40
+        bloque_alto = 40
+        x_inicial = 45
+        y_inicial = 92
+        separacion = 10
+        for i, valor in enumerate(self.lista.mostrar()):
+            x = x_inicial + (bloque_ancho + separacion) * i
+            self.canvas.create_rectangle(x, y_inicial, x + bloque_ancho, y_inicial + bloque_alto, fill="lightblue", outline="yellow", tags="bloque")
+            self.canvas.create_text(x + bloque_ancho / 2, y_inicial + bloque_alto / 2, text=valor, tags="bloque")
 
 if __name__ == "__main__":
     ventana_principal = tk.Tk()

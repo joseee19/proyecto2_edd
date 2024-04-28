@@ -6,6 +6,7 @@ from e_lista_simplemente_enlazada import InterfazGraficaListaSimplementeEnlazada
 from e_lista_doblemente_enlazada import InterfazGraficaListaDoblementeEnlazada
 from e_lista_circular_doble import InterfazGraficaListaCircularDoble
 from e_arbol_busqueda import InterfazGraficaArbolBusquedaBinaria
+from e_arbol_binario import InterfazGraficaArbolBinario
 class VentanaGeneral:
     def __init__(self, master):
         self.master = master
@@ -74,7 +75,7 @@ class VentanaGeneral:
 
     def accion_boton_arbolbinario(self):
         ventana_arbol = tk.Toplevel()
-        # self.interfaz_actual = InterfazGraficaArbolBinario(ventana_arbol)
+        self.interfaz_actual = InterfazGraficaArbolBinario(ventana_arbol)
 
     def accion_boton_arbolbusqueda(self):
         ventana_arbol_busq = tk.Toplevel()
