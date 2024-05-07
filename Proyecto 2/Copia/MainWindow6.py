@@ -88,11 +88,6 @@ class ListaDobleEnlazada:
 
 
 class Ui_VentanaPrincipal3(object):
-    def __init__(self):
-        super().__init__()
-
-        self.lista_doble_enlazada = ListaDobleEnlazada()
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1400, 750)
@@ -156,18 +151,6 @@ class Ui_VentanaPrincipal3(object):
         self.buscar_btn = QtWidgets.QPushButton('Buscar', self.recuadro)
         self.buscar_btn.setGeometry(QtCore.QRect(240, 280, 200, 30))
 
-        self.ver_lista_btn = QtWidgets.QPushButton('Ver Lista', self.recuadro)
-        self.ver_lista_btn.setGeometry(QtCore.QRect(460, 280, 200, 30))
-
-        self.insertar_inicio_btn.clicked.connect(self.insertar_inicio)
-        self.insertar_final_btn.clicked.connect(self.insertar_final)
-        self.insertar_posicion_btn.clicked.connect(self.insertar_por_posicion)
-        self.eliminar_inicio_btn.clicked.connect(self.eliminar_inicio)
-        self.eliminar_final_btn.clicked.connect(self.eliminar_final)
-        self.eliminar_posicion_btn.clicked.connect(self.eliminar_por_posicion)
-        self.buscar_btn.clicked.connect(self.buscar_valor)
-        self.ver_lista_btn.clicked.connect(self.ver_lista)
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -175,25 +158,46 @@ class Ui_VentanaPrincipal3(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
 
-    # Functions
+
+class VentanaPrincipal(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.lista_doble_enlazada = ListaDobleEnlazada()
+
+        self.ui = Ui_VentanaPrincipal3()
+        self.ui.setupUi(self)
+
+        self.ui.insertar_inicio_btn.clicked.connect(self.insertar_inicio)
+        self.ui.insertar_final_btn.clicked.connect(self.insertar_final)
+        self.ui.insertar_posicion_btn.clicked.connect(self.insertar_por_posicion)
+        self.ui.eliminar_inicio_btn.clicked.connect(self.eliminar_inicio)
+        self.ui.eliminar_final_btn.clicked.connect(self.eliminar_final)
+        self.ui.eliminar_posicion_btn.clicked.connect(self.eliminar_por_posicion)
+        self.ui.buscar_btn.clicked.connect(self.buscar_valor)
+
     def insertar_inicio(self):
-        valor = self.valor_txt.text()
+        valor = self.ui.valor_txt.text()
         if valor:
             self.lista_doble_enlazada.insertar_inicio(valor)
-            self.actualizar_texto_recuadro(f' {valor} ->')
+            self.actualizar_texto_recuadro(f'-> {valor}')
+            self.ui.valor_txt.clear()
 
     def insertar_final(self):
-        valor = self.valor_txt.text()
+        valor = self.ui.valor_txt.text()
         if valor:
             self.lista_doble_enlazada.insertar_final(valor)
-            self.actualizar_texto_recuadro(f' {valor} ->')
+            self.actualizar_texto_recuadro(f'-> {valor}')
+            self.ui.valor_txt.clear()
 
     def insertar_por_posicion(self):
-        valor = self.valor_txt.text()
-        posicion = int(self.posicion_txt.text())
+        valor = self.ui.valor_txt.text()
+        posicion = int(self.ui.posicion_txt.text())
         if valor:
             self.lista_doble_enlazada.insertar_por_posicion(valor, posicion)
-            self.actualizar_texto_recuadro(f' {valor} ->')
+            self.actualizar_texto_recuadro(f'-> {valor}')
+            self.ui.valor_txt.clear()
+            self.ui.posicion_txt.clear()
 
     def eliminar_inicio(self):
         self.lista_doble_enlazada.eliminar_inicio()
@@ -204,12 +208,13 @@ class Ui_VentanaPrincipal3(object):
         self.actualizar_texto_recuadro('Se eliminó el último elemento.')
 
     def eliminar_por_posicion(self):
-        posicion = int(self.posicion_txt.text())
+        posicion = int(self.ui.posicion_txt.text())
         self.lista_doble_enlazada.eliminar_por_posicion(posicion)
         self.actualizar_texto_recuadro(f'Se eliminó el elemento en la posición {posicion}.')
+        self.ui.posicion_txt.clear()
 
     def buscar_valor(self):
-        valor = self.buscar_txt.text()
+        valor = self.ui.buscar_txt.text()
         if valor:
             encontrado = self.lista_doble_enlazada.buscar(valor)
             if encontrado:
@@ -217,28 +222,10 @@ class Ui_VentanaPrincipal3(object):
             else:
                 self.actualizar_texto_recuadro(f'El valor {valor} no se encuentra en la lista.')
 
-    def ver_lista(self):
-        texto_lista = self.generar_texto_lista()
-        self.actualizar_texto_recuadro(texto_lista)
-
-    def generar_texto_lista(self):
-        texto = ""
-        actual = self.lista_doble_enlazada.cabeza
-        while actual:
-            texto += f" {actual.valor} ->"
-            actual = actual.siguiente
-        return texto
-
     def actualizar_texto_recuadro(self, texto):
-        self.texto_recuadro.setText(texto)
-
-
-class VentanaPrincipal(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-
-        self.ui = Ui_VentanaPrincipal3()
-        self.ui.setupUi(self)
+        texto_actual = self.ui.texto_recuadro.toPlainText()
+        nuevo_texto = f"{texto}\n{texto_actual}"
+        self.ui.texto_recuadro.setPlainText(nuevo_texto)
 
 
 if __name__ == "__main__":
@@ -246,4 +233,3 @@ if __name__ == "__main__":
     ventana_principal = VentanaPrincipal()
     ventana_principal.show()
     sys.exit(app.exec())
-

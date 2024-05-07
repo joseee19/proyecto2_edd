@@ -87,11 +87,6 @@ class ListaCircularDoble:
 
 
 class Ui_VentanaPrincipal4(object):
-    def __init__(self):
-        super().__init__()
-
-        self.lista_circular_doble = ListaCircularDoble()
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1400, 750)
@@ -154,15 +149,6 @@ class Ui_VentanaPrincipal4(object):
         self.ver_lista_btn = QtWidgets.QPushButton('Ver Lista', self.recuadro)
         self.ver_lista_btn.setGeometry(QtCore.QRect(460, 350, 200, 30))
 
-        self.insertar_inicio_btn.clicked.connect(self.insertar_inicio)
-        self.insertar_final_btn.clicked.connect(self.insertar_final)
-        self.eliminar_inicio_btn.clicked.connect(self.eliminar_inicio)
-        self.eliminar_final_btn.clicked.connect(self.eliminar_final)
-        self.buscar_btn.clicked.connect(self.buscar_valor)
-        self.rotar_izquierda_btn.clicked.connect(self.rotar_izquierda)
-        self.rotar_derecha_btn.clicked.connect(self.rotar_derecha)
-        self.ver_lista_btn.clicked.connect(self.ver_lista)
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -171,19 +157,37 @@ class Ui_VentanaPrincipal4(object):
         Form.setWindowTitle(_translate("Form", "Form"))
 
 
+class VentanaPrincipal(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.lista_circular_doble = ListaCircularDoble()
+
+        self.ui = Ui_VentanaPrincipal4()
+        self.ui.setupUi(self)
+
+        self.ui.insertar_inicio_btn.clicked.connect(self.insertar_inicio)
+        self.ui.insertar_final_btn.clicked.connect(self.insertar_final)
+        self.ui.eliminar_inicio_btn.clicked.connect(self.eliminar_inicio)
+        self.ui.eliminar_final_btn.clicked.connect(self.eliminar_final)
+        self.ui.buscar_btn.clicked.connect(self.buscar_valor)
+        self.ui.rotar_izquierda_btn.clicked.connect(self.rotar_izquierda)
+        self.ui.rotar_derecha_btn.clicked.connect(self.rotar_derecha)
+        self.ui.ver_lista_btn.clicked.connect(self.ver_lista)
+
     def insertar_inicio(self):
-        valor = self.valor_txt.text()
+        valor = self.ui.valor_txt.text()
         if valor:
             self.lista_circular_doble.insertar_inicio(valor)
             self.actualizar_texto_recuadro(f'-> {valor}')
-            self.valor_txt.clear()
+            self.ui.valor_txt.clear()
 
     def insertar_final(self):
-        valor = self.valor_txt.text()
+        valor = self.ui.valor_txt.text()
         if valor:
             self.lista_circular_doble.insertar_final(valor)
             self.actualizar_texto_recuadro(f'-> {valor}')
-            self.valor_txt.clear()
+            self.ui.valor_txt.clear()
 
     def eliminar_inicio(self):
         self.lista_circular_doble.eliminar_inicio()
@@ -194,7 +198,7 @@ class Ui_VentanaPrincipal4(object):
         self.actualizar_texto_recuadro('Se eliminó el último elemento.')
 
     def buscar_valor(self):
-        valor = self.buscar_txt.text()
+        valor = self.ui.buscar_txt.text()
         if valor:
             encontrado = self.lista_circular_doble.buscar(valor)
             if encontrado:
@@ -217,17 +221,9 @@ class Ui_VentanaPrincipal4(object):
         self.actualizar_texto_recuadro(texto)
 
     def actualizar_texto_recuadro(self, texto):
-        texto_actual = self.texto_recuadro.toPlainText()
+        texto_actual = self.ui.texto_recuadro.toPlainText()
         nuevo_texto = f"{texto}\n{texto_actual}"
-        self.texto_recuadro.setPlainText(nuevo_texto)
-
-class VentanaPrincipal(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-
-
-        self.ui = Ui_VentanaPrincipal4()
-        self.ui.setupUi(self)
+        self.ui.texto_recuadro.setPlainText(nuevo_texto)
 
 
 if __name__ == "__main__":

@@ -72,11 +72,6 @@ class ArbolBinario:
 
 
 class Ui_VentanaPrincipal5(object):
-    def __init__(self):
-        super().__init__()
-
-        self.arbol_binario = ArbolBinario()
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1000, 750)
@@ -128,12 +123,6 @@ class Ui_VentanaPrincipal5(object):
         self.ver_arbol_btn = QtWidgets.QPushButton('Ver Árbol', Form)
         self.ver_arbol_btn.setGeometry(QtCore.QRect(600, 300, 200, 30))
 
-        self.insertar_btn.clicked.connect(self.insertar)
-        self.eliminar_btn.clicked.connect(self.eliminar)
-        self.buscar_btn.clicked.connect(self.buscar_valor)
-        self.ver_arbol_btn.clicked.connect(self.ver_arbol)
-
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -141,23 +130,37 @@ class Ui_VentanaPrincipal5(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
 
-    # Functions
+
+class VentanaPrincipal(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.arbol_binario = ArbolBinario()
+
+        self.ui = Ui_VentanaPrincipal5()
+        self.ui.setupUi(self)
+
+        self.ui.insertar_btn.clicked.connect(self.insertar)
+        self.ui.eliminar_btn.clicked.connect(self.eliminar)
+        self.ui.buscar_btn.clicked.connect(self.buscar_valor)
+        self.ui.ver_arbol_btn.clicked.connect(self.ver_arbol)
+
     def insertar(self):
-        valor = self.valor_txt.text()
+        valor = self.ui.valor_txt.text()
         if valor:
             self.arbol_binario.insertar(valor)
             self.actualizar_texto_recuadro(f'Insertado: {valor}')
-            self.valor_txt.clear()
+            self.ui.valor_txt.clear()
 
     def eliminar(self):
-        valor = self.valor_txt.text()
+        valor = self.ui.valor_txt.text()
         if valor:
             self.arbol_binario.eliminar(valor)
             self.actualizar_texto_recuadro(f'Elemento eliminado: {valor}')
-            self.valor_txt.clear()
+            self.ui.valor_txt.clear()
 
     def buscar_valor(self):
-        valor = self.buscar_txt.text()
+        valor = self.ui.buscar_txt.text()
         if valor:
             encontrado = self.arbol_binario.buscar(valor)
             if encontrado:
@@ -195,17 +198,13 @@ class Ui_VentanaPrincipal5(object):
         return texto
 
 
+
     def actualizar_texto_recuadro(self, texto):
-        texto_actual = self.texto_recuadro.toPlainText()
+        texto_actual = self.ui.texto_recuadro.toPlainText()
         nuevo_texto = f"{texto}\n{texto_actual}"
-        self.texto_recuadro.setPlainText(nuevo_texto)
+        self.ui.texto_recuadro.setPlainText(nuevo_texto)
 
-class VentanaPrincipal(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
 
-        self.ui = Ui_VentanaPrincipal5()
-        self.ui.setupUi(self)
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ from MainWindow5 import Ui_VentanaPrincipal2
 from MainWindow6 import Ui_VentanaPrincipal3
 from MainWindow7 import Ui_VentanaPrincipal4
 from MainWindow8 import Ui_VentanaPrincipal5
-from MainWindow9 import Ui_VentanaPrincipal6
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -786,7 +786,6 @@ class Ui_MainWindow(object):
         self.pushButton_8.setText(_translate("MainWindow", "Árboles Binarios"))
         self.pushButton_8.clicked.connect(self.abirVentana_8)
         self.pushButton_9.setText(_translate("MainWindow", "Árboles de Búsqueda"))
-        self.pushButton_9.clicked.connect(self.abrirVentana_9)
 
     def abrirVentana_2(self):
         self.ventana2 = QtWidgets.QMainWindow()
@@ -799,7 +798,7 @@ class Ui_MainWindow(object):
         self.ui = Ui_Form_2()
         self.ui.setupUi(self.ventana3)
         self.ventana3.show()
-
+    
     def abrirVentana_4(self):
         self.ventana4 = QtWidgets.QMainWindow()
         self.ui = Ui_VentanaPrincipal()
@@ -829,15 +828,7 @@ class Ui_MainWindow(object):
         self.ui = Ui_VentanaPrincipal5()
         self.ui.setupUi(self.ventana8)
         self.ventana8.show()
-    
-    def abrirVentana_9(self):
-        self.ventana9 = QtWidgets.QMainWindow()
-        self.ui = Ui_VentanaPrincipal6()
-        self.ui.setupUi(self.ventana9)
-        self.ventana9.show()
 
-
-  
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
